@@ -17,7 +17,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,15 +27,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img src="~/images/logo.svg" alt="Logo" style="width: 100px; height: auto;" />
+                    <img src="~/images/logo.svg" alt="Logo" class="navbar-logo" />
                 </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Vessels" asp-action="Index">Vessels</a></li>
+                    <li><a asp-area="" asp-controller="Customers" asp-action="Index">Customers</a></li>
                     <li><a asp-area="" asp-controller="ShippingSchedules" asp-action="Index">Schedules</a></li>
                     <li><a asp-area="" asp-controller="Bookings" asp-action="Index">Bookings</a></li>
-                    <li><a asp-area="" asp-controller="Customers" asp-action="Index">Customers</a></li>
-                    <li><a asp-area="" asp-controller="Vessels" asp-action="Index">Vessels</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

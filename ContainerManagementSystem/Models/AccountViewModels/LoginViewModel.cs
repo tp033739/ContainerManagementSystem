@@ -9,7 +9,8 @@ namespace ContainerManagementSystem.Models.AccountViewModels
     public class LoginViewModel
     {
         [Required]
-        public string Username { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

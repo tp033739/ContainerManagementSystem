@@ -9,6 +9,10 @@ namespace ContainerManagementSystem.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -23,5 +27,9 @@ namespace ContainerManagementSystem.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Account type")]
+        public string IdentityRole { get; set; }
     }
 }
