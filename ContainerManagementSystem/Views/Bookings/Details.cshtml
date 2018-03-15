@@ -1,0 +1,41 @@
+﻿@model ContainerManagementSystem.Models.Booking
+
+@{
+    ViewData["Title"] = "Booking details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CargoWeightInKilograms)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CargoWeightInKilograms)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfContainers)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfContainers)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippingSchedule)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShippingSchedule.ArrivalLocation)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

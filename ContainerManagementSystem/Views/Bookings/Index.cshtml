@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ContainerManagementSystem.Models.Booking>
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingSchedule)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CargoWeightInKilograms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfContainers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingSchedule.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CargoWeightInKilograms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfContainers)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,50 @@
+﻿@model ContainerManagementSystem.Models.ShippingSchedule
+
+@{
+    ViewData["Title"] = "Delete shipping schedule";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartureTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureLocation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartureLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalLocation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vessel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vessel.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
