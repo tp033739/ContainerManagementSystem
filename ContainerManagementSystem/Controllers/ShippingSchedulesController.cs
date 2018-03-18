@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +21,19 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // GET: ShippingSchedules
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string departureLocation, string arrivalLocation)
         {
-            var applicationDbContext = _context.ShippingSchedule.Include(s => s.Vessel);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["DepartureLocation"] = departureLocation;
+            ViewData["ArrivalLocation"] = arrivalLocation;
+
+            IQueryable<ShippingSchedule> context = _context.ShippingSchedule.Include(s => s.Vessel);
+
+            if (!String.IsNullOrWhiteSpace(departureLocation))
+                context = context.Where(s => s.DepartureLocation.Contains(departureLocation));
+            if (!String.IsNullOrWhiteSpace(arrivalLocation))
+                context = context.Where(s => s.ArrivalLocation.Contains(arrivalLocation));
+
+            return View(await context.ToListAsync());
         }
 
         // GET: ShippingSchedules/Details/5
