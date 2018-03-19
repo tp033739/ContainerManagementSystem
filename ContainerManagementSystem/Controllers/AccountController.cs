@@ -81,16 +81,16 @@ namespace ContainerManagementSystem.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpGet]
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            ViewData["IdentityRole"] = new SelectList(new string[] { "Agent", "Administrator" });
+            ViewData["IdentityRole"] = new SelectList(new string[] { Roles.Agent, Roles.Administrator });
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
@@ -98,7 +98,7 @@ namespace ContainerManagementSystem.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                if (!(new[] { "Administrator", "Agent" }).Contains(model.IdentityRole))
+                if (!(new[] { Roles.Administrator, Roles.Agent }).Contains(model.IdentityRole))
                 {
                     throw new ApplicationException("Invalid identity role");
                 }
@@ -124,7 +124,7 @@ namespace ContainerManagementSystem.Controllers
                 AddErrors(result);
             }
 
-            ViewData["IdentityRole"] = new SelectList(new string[] { "Agent", "Administrator" }, model.IdentityRole);
+            ViewData["IdentityRole"] = new SelectList(new string[] { Roles.Agent, Roles.Administrator }, model.IdentityRole);
 
             // If we got this far, something failed, redisplay form
             return View(model);

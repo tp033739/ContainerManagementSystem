@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ContainerManagementSystem.Controllers
 {
-    [Authorize(Roles = "Administrator,Agent")]
+    [Authorize(Roles = Roles.AdministratorOrAgent)]
     public class ShippingSchedulesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -56,7 +56,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // GET: ShippingSchedules/Create
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         public IActionResult Create()
         {
             ViewData["VesselId"] = new SelectList(_context.Vessel, "Id", "Name");
@@ -66,7 +66,7 @@ namespace ContainerManagementSystem.Controllers
         // POST: ShippingSchedules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,DepartureTime,ArrivalTime,DepartureLocation,ArrivalLocation,VesselId")] ShippingSchedule shippingSchedule)
@@ -82,7 +82,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // GET: ShippingSchedules/Edit/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -102,7 +102,7 @@ namespace ContainerManagementSystem.Controllers
         // POST: ShippingSchedules/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DepartureTime,ArrivalTime,DepartureLocation,ArrivalLocation,VesselId")] ShippingSchedule shippingSchedule)
@@ -137,7 +137,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // GET: ShippingSchedules/Delete/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,7 +157,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // POST: ShippingSchedules/Delete/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

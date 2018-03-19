@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ContainerManagementSystem.Controllers
 {
-    [Authorize(Roles = "Administrator,Agent")]
+    [Authorize(Roles = Roles.AdministratorOrAgent)]
     public class BookingsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -31,7 +29,7 @@ namespace ContainerManagementSystem.Controllers
                 .Include(b => b.Customer)
                 .Include(b => b.ShippingSchedule);
 
-            if (User.IsInRole("Administrator"))
+            if (User.IsInRole(Roles.Administrator))
             {
                 return View(await context.ToListAsync());
             }
@@ -115,7 +113,8 @@ namespace ContainerManagementSystem.Controllers
                 return NotFound();
             }
 
-            if (!BookingExists(id))
+            var savedBooking = await GetBooking(id);
+            if (savedBooking == null)
             {
                 return NotFound();
             }
@@ -124,6 +123,7 @@ namespace ContainerManagementSystem.Controllers
             {
                 try
                 {
+                    booking.AgentUserId = savedBooking.AgentUserId;
                     _context.Update(booking);
                     await _context.SaveChangesAsync();
                 }
@@ -180,7 +180,7 @@ namespace ContainerManagementSystem.Controllers
 
         private bool BookingExists(int id)
         {
-            if (User.IsInRole("Adminstrator"))
+            if (User.IsInRole(Roles.Administrator))
             {
                 return _context.Booking
                     .Any(b => b.Id == id);
@@ -199,7 +199,7 @@ namespace ContainerManagementSystem.Controllers
                 .Include(b => b.Customer)
                 .Include(b => b.ShippingSchedule);
 
-            if (User.IsInRole("Administrator"))
+            if (User.IsInRole(Roles.Administrator))
             {
                 return await context.SingleOrDefaultAsync(b => b.Id == id);
             }

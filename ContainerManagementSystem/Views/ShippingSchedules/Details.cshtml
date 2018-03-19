@@ -42,7 +42,7 @@
     </dl>
 </div>
 <div>
-    @if (User.IsInRole("Administrator"))
+    @if (User.IsInRole(Roles.Administrator))
     {
         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> <span>|</span>
     }

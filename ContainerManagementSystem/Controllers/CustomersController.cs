@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContainerManagementSystem.Data;
 using ContainerManagementSystem.Models;
@@ -12,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ContainerManagementSystem.Controllers
 {
-    [Authorize(Roles = "Administrator,Agent")]
+    [Authorize(Roles = Roles.AdministratorOrAgent)]
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -27,7 +24,7 @@ namespace ContainerManagementSystem.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            if (User.IsInRole("Adminstrator"))
+            if (User.IsInRole(Roles.Administrator))
             {
                 return View(await _context.Customer.ToListAsync());
             }
@@ -108,7 +105,8 @@ namespace ContainerManagementSystem.Controllers
                 return NotFound();
             }
 
-            if (!CustomerExists(id))
+            var savedCustomer = await GetCustomer(id);
+            if (savedCustomer == null)
             {
                 return NotFound();
             }
@@ -117,6 +115,7 @@ namespace ContainerManagementSystem.Controllers
             {
                 try
                 {
+                    customer.AgentUserId = savedCustomer.AgentUserId;
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
@@ -171,7 +170,7 @@ namespace ContainerManagementSystem.Controllers
 
         private bool CustomerExists(int id)
         {
-            if (User.IsInRole("Administrator"))
+            if (User.IsInRole(Roles.Administrator))
             {
                 return _context.Customer
                     .Any(c => c.Id == id);
@@ -186,7 +185,7 @@ namespace ContainerManagementSystem.Controllers
 
         private async Task<Customer> GetCustomer(int? id)
         {
-            if (User.IsInRole("Administrator"))
+            if (User.IsInRole(Roles.Administrator))
             {
                 return await _context.Customer
                     .SingleOrDefaultAsync(c => c.Id == id);

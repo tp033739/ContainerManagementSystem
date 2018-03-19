@@ -73,7 +73,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Vessel.Name)
             </td>
-@if (User.IsInRole("Administrator"))
+@if (User.IsInRole(Roles.Administrator))
 {
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -23,7 +23,7 @@ namespace ContainerManagementSystem.Data
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var roles = new string[] { "Administrator", "Agent" };
+            var roles = new string[] { Roles.Administrator, Roles.Agent };
             foreach (var role in roles)
             {
                 if (!await roleManager.RoleExistsAsync(role))
@@ -45,14 +45,14 @@ namespace ContainerManagementSystem.Data
                     username = "admin",
                     email = "admin@localhost.localdomain",
                     password = "fghjFGHJ4567$%^&",
-                    role = "Administrator"
+                    role = Roles.Administrator
                 },
                 new
                 {
                     username = "agent",
                     email = "agent@localhost.localdomain",
                     password = "fghjFGHJ4567$%^&",
-                    role = "Agent"
+                    role = Roles.Agent
                 }
             };
 

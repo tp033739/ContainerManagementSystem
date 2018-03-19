@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ContainerManagementSystem.Controllers
 {
-    [Authorize(Roles = "Administrator,Agent")]
+    [Authorize(Roles = Roles.AdministratorOrAgent)]
     public class VesselsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -46,7 +46,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // GET: Vessels/Create
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         public IActionResult Create()
         {
             return View();
@@ -55,7 +55,7 @@ namespace ContainerManagementSystem.Controllers
         // POST: Vessels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Capacity")] Vessel vessel)
@@ -70,7 +70,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // GET: Vessels/Edit/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,7 +89,7 @@ namespace ContainerManagementSystem.Controllers
         // POST: Vessels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Capacity")] Vessel vessel)
@@ -123,7 +123,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // GET: Vessels/Delete/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +142,7 @@ namespace ContainerManagementSystem.Controllers
         }
 
         // POST: Vessels/Delete/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
