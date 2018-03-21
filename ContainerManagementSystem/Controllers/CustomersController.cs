@@ -110,12 +110,14 @@ namespace ContainerManagementSystem.Controllers
             {
                 return NotFound();
             }
+            var savedAgentUserId = savedCustomer.AgentUserId;
+            _context.Entry(savedCustomer).State = EntityState.Detached;
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    customer.AgentUserId = savedCustomer.AgentUserId;
+                    customer.AgentUserId = savedAgentUserId;
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }

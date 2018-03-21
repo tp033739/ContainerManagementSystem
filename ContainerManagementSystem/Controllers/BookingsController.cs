@@ -69,7 +69,7 @@ namespace ContainerManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CargoWeightInKilograms,NumberOfContainers,CustomerId,ShippingScheduleId")] Booking booking)
+        public async Task<IActionResult> Create([Bind("Id,CargoDescription,CargoWeightInKilograms,NumberOfContainers,CustomerId,ShippingScheduleId")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace ContainerManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CargoWeightInKilograms,NumberOfContainers,CustomerId,ShippingScheduleId")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CargoDescription,CargoWeightInKilograms,NumberOfContainers,CustomerId,ShippingScheduleId")] Booking booking)
         {
             if (id != booking.Id)
             {
@@ -118,12 +118,14 @@ namespace ContainerManagementSystem.Controllers
             {
                 return NotFound();
             }
+            var savedAgentUserId = savedBooking.AgentUserId;
+            _context.Entry(savedBooking).State = EntityState.Detached;
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    booking.AgentUserId = savedBooking.AgentUserId;
+                    booking.AgentUserId = savedAgentUserId;
                     _context.Update(booking);
                     await _context.SaveChangesAsync();
                 }

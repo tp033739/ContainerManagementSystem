@@ -9,6 +9,10 @@ namespace ContainerManagementSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Display(Name = "Cargo description")]
+        [Required]
+        public string CargoDescription { get; set; }
+
         [Display(Name = "Cargo weight (kg)")]
         [Required]
         public float CargoWeightInKilograms { get; set; }
