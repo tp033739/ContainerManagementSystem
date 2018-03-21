@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using ContainerManagementSystem.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContainerManagementSystem.Data
 {
@@ -12,6 +13,7 @@ namespace ContainerManagementSystem.Data
         {
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             context.Database.EnsureCreated();
+            context.Database.Migrate();
 
             SeedRoles(serviceProvider).Wait();
             SeedUsers(serviceProvider).Wait();
