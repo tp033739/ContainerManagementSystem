@@ -44,11 +44,20 @@
         </div>
     </nav>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
+        <main>
+            @RenderBody()
+        </main>
         <footer>
-            <p>&copy; 2018 - ContainerManagementSystem</p>
-            <small>DISCLAIMER: This website is part of a university assignment. This website is not affiliated with Maersk.</small>
+            <hr />
+            <div>
+                <small>&copy; 2018 - ContainerManagementSystem</small>
+            </div>
+            <div>
+                <small class="smaller">
+                    DISCLAIMER: This website is part of a university assignment. This website is not affiliated with Maersk.
+                    The Maersk Line logo is a registered trademark of Maersk.
+                </small>
+            </div>
         </footer>
     </div>
 

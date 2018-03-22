@@ -1,1 +1,1 @@
-body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px}.navbar-logo{width:100px;height:auto}.logo{width:400px;height:auto;padding:20px 0}
+body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px;display:flex;min-height:calc(100vh - 70px);flex-direction:column}.body-content>main{flex:1}.navbar-logo{width:100px;height:auto}.logo{width:400px;height:auto;padding:20px 0}.smaller{font-size:xx-small}

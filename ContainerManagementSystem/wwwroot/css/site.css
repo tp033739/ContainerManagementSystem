@@ -8,6 +8,13 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    display: flex;
+    min-height: calc(100vh - 70px);
+    flex-direction: column;
+}
+
+.body-content > main {
+    flex: 1;
 }
 
 .navbar-logo {
@@ -19,4 +26,8 @@
     width: 400px;
     height: auto;
     padding: 20px 0;
+}
+
+.smaller {
+    font-size: xx-small;
 }
