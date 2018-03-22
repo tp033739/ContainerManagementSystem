@@ -8,6 +8,10 @@
 
 <div>
     <hr />
+@if (!String.IsNullOrWhiteSpace(TempData["message"] as string))
+{
+    <div class="alert alert-success" role="alert">@TempData["message"]</div>
+}
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CargoDescription)
@@ -37,11 +41,10 @@
             @Html.DisplayNameFor(model => model.ShippingSchedule)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ShippingSchedule.ArrivalLocation)
+            @Html.DisplayFor(model => model.ShippingSchedule.Description)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

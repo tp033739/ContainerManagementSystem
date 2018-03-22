@@ -34,7 +34,7 @@ namespace ContainerManagementSystem.Models
 
         public string Description
         {
-            get => $"{DepartureTime}: {DepartureLocation} -> {ArrivalLocation}";
+            get => $"{String.Format("{0:yyyy-MM-dd HH:mm}", DepartureTime)} ({DepartureLocation} 🡒 {ArrivalLocation})";
         }
     }
 }
