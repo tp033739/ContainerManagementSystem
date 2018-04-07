@@ -13,7 +13,14 @@ namespace ContainerManagementSystem.Data
         {
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             context.Database.EnsureCreated();
-            context.Database.Migrate();
+            try
+            {
+                context.Database.Migrate();
+            }
+            catch
+            {
+                // do nothing
+            }
 
             SeedRoles(serviceProvider).Wait();
             SeedUsers(serviceProvider).Wait();
